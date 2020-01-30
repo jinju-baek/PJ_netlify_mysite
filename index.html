@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
 	<title>Developer:징구</title>
+	<meta charset="utf-8">
+	<!-- 반응형 웹 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="CSS/common.css">
 	<link rel="stylesheet" type="text/css" href="CSS/effect.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
@@ -12,7 +14,9 @@
 	@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 	/* name/ font-family: 'Pacifico', cursive; */
 		.wrap{
+			/* width: -> 고정길이 */
 			max-width: 1400px;
+			min-width: 360px;
 			display: flex;
 			justify-content: center;
 			box-sizing: border-box;
@@ -104,7 +108,7 @@
 			margin-bottom: 20px;
 		}
 		.bar_border{
-			width: 815px;
+			width: 100%;
 			height: 25px;
 			background-color: #D9D2F1;
 			overflow: hidden;
@@ -148,24 +152,28 @@
 			background-color: #CCC;
 		}
 		.download_wrap{
-			width: 100%;
 			display: flex;
 			justify-content: space-around;
-			align-items: center;
-			padding: 25px;
 		}
-		.download_wrap div a{
+		.download_wrap div{
+			transition: transform .3s;
+			border-radius: 5px;
+			overflow: hidden;
+		}
+		.download_wrap div button{
 			padding: 8px 20px;
 			color: white;
 			border-radius: 5px;
 			background-color: #0F4C81;
-			transition: transform .3s;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			width: 110px;
+			height: 35px;
 		}
-		.download_wrap div a:hover{
+		.download_wrap div:hover{
+			transform: scale(1.2);
 			box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
-		}
-		.download_wrap div a>i:hover{
-			transform: scale(1.3);
 		}
 		.fix_btn{
 			position: fixed;
@@ -197,6 +205,7 @@
 		.top_btn{
 			bottom: 100px;
 			background-color: #2F3138;
+			display: none;
 		}
 		.msg_wrap{
 			position: absolute;
@@ -248,7 +257,7 @@
 			justify-content: space-between;
 			align-items: center;
 		}
-		.send_btn>a{
+		.send_btn>button{
 			width: 200px;
 			display: flex;
 			justify-content: center;
@@ -256,6 +265,10 @@
 			padding: 12px 15px;
 			border: 1px solid #0F4C81;
 			border-radius: 5px;
+			outline: none;
+			background-color: #0F4C81;
+			color: white;
+			cursor: pointer;
 		}
 		.send_btn>i{
 			padding-left: 10px;
@@ -275,7 +288,67 @@
 			height: 100%;
 
 		}
-		/* resume, github hover 넣기 */
+		
+		/* 
+			##Device = Most of the Smartphones Mobiles (portrait)
+			##Screen = B/w 320px to 479px
+			##Device = 대부분의 스마트폰 모바일 기기(세로)
+			##Screen = 320px에서 479px 사이
+		 */
+		 /*320~480px 사이즈의 디바이스*/
+		@media(min-width: 320px) and (max-width: 480px){
+			.wrap{
+				width: 100%;
+				flex-direction: column;
+				padding: 5px;
+			}
+			.side_picture{
+				height: 205px;
+			}
+			.side_wrap, .content_wrap{
+				width: 100%;
+				margin: 0 auto;
+			}
+			.nav_menu{
+				display: none;
+			}
+			table tr th:last-child, table tr td:last-child{
+				display: none;
+			}
+			table td, table th{
+				font-size: 12px;
+			}
+			.fix_btn{
+				width: 50px;
+				height: 50px;
+				right: 20px;
+				font-size: 20px;
+			}
+			.top_btn{
+				bottom: 95px;
+			}
+			.content_padding{
+				padding: 10px;
+			}
+			.modal_wrap{
+				justify-content: center;
+				align-items: center;
+			}
+			.msg_wrap{
+				width: 95%;
+				position: static;
+			}
+			.note_wrap{
+				padding: 10px;
+				width: 100%;
+			}
+			.note_wrap input{
+				font-size: 12px;
+				height: 20px;
+			}
+
+		}
+
 	</style>
 </head>
 <body>
@@ -295,26 +368,29 @@
 			  	blur : focus가 들어갔다가 없어질 경우
 			  	click : 클릭
 			  -->
-			<div class="note_wrap">
-				<div class="conn_note">Please contact me if you are interested.</div>
-				<div class="send_info">
-					<div class="send_name">
-						<input type="text" class="send_input" placeholder="Name">
+			<form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbwCApJMm7VW7yMRo64ix8LB_mMXWEkiFqvyZBvj4x4ckI6e2UwV/exec">
+				<div class="note_wrap">
+					<div class="conn_note">Please contact me if you are interested.</div>
+					<div class="send_info">
+						<div class="send_name">
+							<input type="text" class="send_input" placeholder="Name" name="name">
+						</div>
+						<div class="area"></div>
+						<div class="send_email">
+							<input type="text" class="send_input" placeholder="Email" name="email">
+						</div>
 					</div>
-					<div class="area"></div>
-					<div class="send_email">
-						<input type="text" class="send_input" placeholder="Email">
+					<div class="send_msg">
+						<input type="text" class="send_input" placeholder="Massage" name="message">
+					</div>
+					<div class="send_btn">
+						<span class="err_msg">Please enter a value:/</span>
+						<button type="submit">
+							SEND MESSAGE <i class="fas fa-paper-plane"></i>
+						</button>
 					</div>
 				</div>
-				<div class="send_msg">
-					<input type="text" class="send_input" placeholder="Massage">
-				</div>
-				<div class="send_btn">
-					<span class="err_msg">Please enter a value:/</span>
-					<a href="#">SEND MESSAGE <i class="fas fa-paper-plane"></i></a>
-				</div>
-			</div>
-
+			</form>
 		</div>
 	</div>
 
@@ -343,7 +419,7 @@
 					</div>
 				</div>
 
-				<div class="common_panel layer nav">
+				<div class="common_panel layer nav nav_menu">
 					<div class="menu_title">
 						<i class="fas fa-bars"></i>
 						<span> Menu</span>
@@ -378,11 +454,14 @@
 					</div>
 					<div class="content_padding download_wrap">
 						<div class="git_wrap">
-							<a href="https://github.com/jinju-baek" target="_blank">Github <i class="fab fa-github-alt"></i>
-							</a>
+							<button class="git_btn">
+								Github <i class="fab fa-github-alt"></i>
+							</button>
 						</div>
 						<div class="resume_wrap">
-							<a href="#">Resume <i class="fas fa-download"></i></a>
+							<button class="resume_btn">
+								Resume <i class="fas fa-download"></i>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -483,6 +562,21 @@
 			// 1000m/s = 1초
 			$(this).animate({width:widthVal}, 1000); 
 		});
+		// Scroll Top버튼 생성 및 TOP로 이동
+		$(window).scroll(function(){ // 스크롤이 움직이면
+			// scrollTop : scrollTop기준(윈도우 상단바 끝부분)으로 scroll이 맨 위에 있을 경우 0
+			if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
+				// fadeIn : 잔상효과처럼 나타남
+				// fadeIn은 기본적으로 display : block으로 나타나기때문에 flex로 바꿔줌
+				$('.top_btn').fadeIn().css("display", "flex");
+			}else{
+				$('.top_btn').fadeOut();
+			}
+		});
+		$('.top_btn').click(function(){
+			$('html, body').animate({scrollTop : 0}, 800);
+		});
+
 	});
 	// (document)문서 전체에서 send_input중 blur했을 경우 (function)아래 내용을 실행
 	$(document).on('blur', '.send_input', function() {
@@ -533,13 +627,23 @@
 
 		// conn_btn을 클릭하면 function() 실행
 		$(document).on('click', '.conn_btn', function(){
-			$('.modal_wrap').css('display', 'block');
+			$('.modal_wrap').css('display', 'flex');
 			$(this).css('display', 'none');
 		});
 
 		$(document).on('click', '.close_btn', function(){
 			$('.modal_wrap').css('display', 'none');
 			$('.conn_btn').css('display', 'flex');
+		});
+
+		// 이력서 버튼 클릭시 resume.hwp 다운로드
+		$(document).on('click', '.resume_btn', function(){
+			window.location.assign('resume/resume.hwp');
+		});
+
+		// 깃허브 버튼 클릭시 홈페이지 이동
+		$(document).on('click', '.git_btn', function(){
+			location.href='https://github.com/jinju-baek';
 		});
 	</script>
 </html>
